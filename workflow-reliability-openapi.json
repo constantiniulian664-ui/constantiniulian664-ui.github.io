@@ -1,113 +1,253 @@
 ﻿{
-  "openapi": "3.1.0",
-  "info": {
-    "title": "TARZAN Workflow Reliability Sandbox",
-    "version": "0.1",
-    "description": "Public sandbox API for the Phase-3 AgentProof-verified WORKFLOW_RELIABILITY Economic Artifact. It diagnoses bounded reliability issues in sanitized n8n workflow JSON and applies deterministic supported repairs. No live payment."
-  },
-  "servers": [{"url": "https://communications-outstanding-digest-before.trycloudflare.com"}],
-  "paths": {
-    "/health": {
-      "get": {
-        "operationId": "health",
-        "summary": "Check current sandbox availability",
-        "responses": {"200": {"description": "Sandbox is reachable"}}
-      }
-    },
-    "/capabilities": {
-      "get": {
-        "operationId": "listCapabilities",
-        "summary": "Read machine-readable capability, pricing, verification and availability metadata",
-        "responses": {"200": {"description": "TARZAN capability catalog"}}
-      }
-    },
-    "/invoke": {
-      "post": {
-        "operationId": "invokeWorkflowReliability",
-        "summary": "Repair bounded reliability issues in sanitized n8n workflow JSON",
-        "description": "Send one sanitized n8n workflow. Phase 5 is a zero-charge sandbox. The artifact is re-verified by AgentProof and gated by AURA before execution.",
-        "requestBody": {
-          "required": true,
-          "content": {
-            "application/json": {
-              "schema": {"$ref": "#/components/schemas/InvokeRequest"}
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Normalized result with repaired workflow, pricing, AURA decision, AgentProof evidence, rate-limit state and receipt",
-            "content": {"application/json": {"schema": {"$ref": "#/components/schemas/InvokeResponse"}}}
-          }
-        }
-      }
-    }
-  },
-  "components": {
-    "schemas": {
-      "InvokeRequest": {
-        "type": "object",
-        "required": ["request_id", "client_id", "auth", "capability_id", "input"],
-        "properties": {
-          "request_id": {"type": "string", "description": "Caller-generated unique request id"},
-          "client_id": {"type": "string", "description": "Caller identity label for sandbox rate limiting"},
-          "capability_id": {"type": "string", "const": "WORKFLOW_RELIABILITY"},
-          "auth": {
-            "type": "object",
-            "description": "Non-cryptographic Phase-5 sandbox caller assertion; not production authentication.",
-            "required": ["scheme", "subject", "asserted"],
-            "properties": {
-              "scheme": {"type": "string", "const": "LOCAL_ASSERTION"},
-              "subject": {"type": "string", "description": "Must equal client_id"},
-              "asserted": {"type": "boolean", "const": true}
-            }
-          },
-          "input": {
-            "type": "object",
-            "required": ["workflow"],
-            "properties": {
-              "workflow": {
-                "type": "object",
-                "description": "Sanitized n8n workflow JSON. Do not include secrets, credentials or unnecessary personal data.",
-                "required": ["nodes", "connections"],
-                "properties": {
-                  "nodes": {"type": "array", "items": {"type": "object"}},
-                  "connections": {"type": "object"},
-                  "settings": {"type": "object"}
-                },
-                "additionalProperties": true
-              }
-            }
-          }
-        }
-      },
-      "InvokeResponse": {
-        "type": "object",
-        "required": ["ok", "capability_id", "pricing", "authority", "agentproof", "receipt"],
-        "properties": {
-          "ok": {"type": "boolean"},
-          "capability_id": {"type": "string"},
-          "result": {"type": "object"},
-          "pricing": {"type": "object"},
-          "authority": {"type": "object"},
-          "agentproof": {"type": "object"},
-          "rate_limit": {"type": "object"},
-          "receipt": {"type": "object"},
-          "error": {"type": ["object", "null"]}
-        }
-      }
-    }
-  },
-  "x-tarzan-identity": "urn:air:constantiniulian664-ui.github.io:api:workflow-reliability",
-  "x-tarzan-public-sandbox": true,
-  "x-tarzan-live-payment": false,
-  "x-tarzan-reference-price": {"amount": 299.0, "currency": "CHF", "state": "HYPOTHESIS", "chargedInPhase5": false},
-  "x-tarzan-verification": {"system": "AgentProof", "phase3Verified": true},
-  "x-tarzan-authority": {"system": "AURA", "automaticExternalSpendCHF": 0.0},
-  "x-tarzan-auth-truth": "LOCAL_ASSERTION is not cryptographic authentication.",
-  "x-tarzan-availability": {"health": "/health", "catalog": "/capabilities"},
-  "x-tarzan-protocol-adapters": {
-    "mcp": "https://communications-outstanding-digest-before.trycloudflare.com/mcp",
-    "a2a": "https://communications-outstanding-digest-before.trycloudflare.com/a2a"
-  }
+    "openapi":  "3.1.0",
+    "info":  {
+                 "title":  "TARZAN Workflow Reliability Sandbox",
+                 "version":  "0.1",
+                 "description":  "Public sandbox API for the Phase-3 AgentProof-verified WORKFLOW_RELIABILITY Economic Artifact. It diagnoses bounded reliability issues in sanitized n8n workflow JSON and applies deterministic supported repairs. No live payment."
+             },
+    "servers":  [
+                    {
+                        "url":  "https://communications-outstanding-digest-before.trycloudflare.com"
+                    }
+                ],
+    "paths":  {
+                  "/health":  {
+                                  "get":  {
+                                              "operationId":  "health",
+                                              "summary":  "Check current sandbox availability",
+                                              "responses":  {
+                                                                "200":  {
+                                                                            "description":  "Sandbox is reachable"
+                                                                        }
+                                                            }
+                                          }
+                              },
+                  "/capabilities":  {
+                                        "get":  {
+                                                    "operationId":  "listCapabilities",
+                                                    "summary":  "Read machine-readable capability, pricing, verification and availability metadata",
+                                                    "responses":  {
+                                                                      "200":  {
+                                                                                  "description":  "TARZAN capability catalog"
+                                                                              }
+                                                                  }
+                                                }
+                                    },
+                  "/invoke":  {
+                                  "post":  {
+                                               "operationId":  "invokeWorkflowReliability",
+                                               "summary":  "Repair bounded reliability issues in sanitized n8n workflow JSON",
+                                               "description":  "Send one sanitized n8n workflow. Phase 5 is a zero-charge sandbox. The artifact is re-verified by AgentProof and gated by AURA before execution.",
+                                               "requestBody":  {
+                                                                   "required":  true,
+                                                                   "content":  {
+                                                                                   "application/json":  {
+                                                                                                            "schema":  {
+                                                                                                                           "$ref":  "#/components/schemas/InvokeRequest"
+                                                                                                                       },
+                                                                                                            "example":  {
+                                                                                                                            "request_id":  "example-request-001",
+                                                                                                                            "client_id":  "example-agent",
+                                                                                                                            "auth":  {
+                                                                                                                                         "scheme":  "LOCAL_ASSERTION",
+                                                                                                                                         "subject":  "example-agent",
+                                                                                                                                         "asserted":  true
+                                                                                                                                     },
+                                                                                                                            "capability_id":  "WORKFLOW_RELIABILITY",
+                                                                                                                            "input":  {
+                                                                                                                                          "workflow":  {
+                                                                                                                                                           "name":  "Example Workflow",
+                                                                                                                                                           "nodes":  [
+                                                                                                                                                                         {
+                                                                                                                                                                             "parameters":  {
+                                                                                                                                                                                                "url":  "https://example.com"
+                                                                                                                                                                                            },
+                                                                                                                                                                             "id":  "http-1",
+                                                                                                                                                                             "name":  "Fetch API",
+                                                                                                                                                                             "type":  "n8n-nodes-base.httpRequest",
+                                                                                                                                                                             "typeVersion":  4.2,
+                                                                                                                                                                             "position":  [
+                                                                                                                                                                                              0,
+                                                                                                                                                                                              0
+                                                                                                                                                                                          ]
+                                                                                                                                                                         }
+                                                                                                                                                                     ],
+                                                                                                                                                           "connections":  {
+
+                                                                                                                                                                           },
+                                                                                                                                                           "settings":  {
+
+                                                                                                                                                                        }
+                                                                                                                                                       }
+                                                                                                                                      }
+                                                                                                                        }
+                                                                                                        }
+                                                                               }
+                                                               },
+                                               "responses":  {
+                                                                 "200":  {
+                                                                             "description":  "Normalized result with repaired workflow, pricing, AURA decision, AgentProof evidence, rate-limit state and receipt",
+                                                                             "content":  {
+                                                                                             "application/json":  {
+                                                                                                                      "schema":  {
+                                                                                                                                     "$ref":  "#/components/schemas/InvokeResponse"
+                                                                                                                                 }
+                                                                                                                  }
+                                                                                         }
+                                                                         }
+                                                             }
+                                           }
+                              }
+              },
+    "components":  {
+                       "schemas":  {
+                                       "InvokeRequest":  {
+                                                             "type":  "object",
+                                                             "required":  [
+                                                                              "request_id",
+                                                                              "client_id",
+                                                                              "auth",
+                                                                              "capability_id",
+                                                                              "input"
+                                                                          ],
+                                                             "properties":  {
+                                                                                "request_id":  {
+                                                                                                   "type":  "string",
+                                                                                                   "description":  "Caller-generated unique request id"
+                                                                                               },
+                                                                                "client_id":  {
+                                                                                                  "type":  "string",
+                                                                                                  "description":  "Caller identity label for sandbox rate limiting"
+                                                                                              },
+                                                                                "capability_id":  {
+                                                                                                      "type":  "string",
+                                                                                                      "const":  "WORKFLOW_RELIABILITY"
+                                                                                                  },
+                                                                                "auth":  {
+                                                                                             "type":  "object",
+                                                                                             "description":  "Non-cryptographic Phase-5 sandbox caller assertion; not production authentication.",
+                                                                                             "required":  [
+                                                                                                              "scheme",
+                                                                                                              "subject",
+                                                                                                              "asserted"
+                                                                                                          ],
+                                                                                             "properties":  {
+                                                                                                                "scheme":  {
+                                                                                                                               "type":  "string",
+                                                                                                                               "const":  "LOCAL_ASSERTION"
+                                                                                                                           },
+                                                                                                                "subject":  {
+                                                                                                                                "type":  "string",
+                                                                                                                                "description":  "Must equal client_id"
+                                                                                                                            },
+                                                                                                                "asserted":  {
+                                                                                                                                 "type":  "boolean",
+                                                                                                                                 "const":  true
+                                                                                                                             }
+                                                                                                            }
+                                                                                         },
+                                                                                "input":  {
+                                                                                              "type":  "object",
+                                                                                              "required":  [
+                                                                                                               "workflow"
+                                                                                                           ],
+                                                                                              "properties":  {
+                                                                                                                 "workflow":  {
+                                                                                                                                  "type":  "object",
+                                                                                                                                  "description":  "Sanitized n8n workflow JSON. Do not include secrets, credentials or unnecessary personal data.",
+                                                                                                                                  "required":  [
+                                                                                                                                                   "nodes",
+                                                                                                                                                   "connections"
+                                                                                                                                               ],
+                                                                                                                                  "properties":  {
+                                                                                                                                                     "nodes":  {
+                                                                                                                                                                   "type":  "array",
+                                                                                                                                                                   "items":  {
+                                                                                                                                                                                 "type":  "object"
+                                                                                                                                                                             }
+                                                                                                                                                               },
+                                                                                                                                                     "connections":  {
+                                                                                                                                                                         "type":  "object"
+                                                                                                                                                                     },
+                                                                                                                                                     "settings":  {
+                                                                                                                                                                      "type":  "object"
+                                                                                                                                                                  }
+                                                                                                                                                 },
+                                                                                                                                  "additionalProperties":  true
+                                                                                                                              }
+                                                                                                             }
+                                                                                          }
+                                                                            }
+                                                         },
+                                       "InvokeResponse":  {
+                                                              "type":  "object",
+                                                              "required":  [
+                                                                               "ok",
+                                                                               "capability_id",
+                                                                               "pricing",
+                                                                               "authority",
+                                                                               "agentproof",
+                                                                               "receipt"
+                                                                           ],
+                                                              "properties":  {
+                                                                                 "ok":  {
+                                                                                            "type":  "boolean"
+                                                                                        },
+                                                                                 "capability_id":  {
+                                                                                                       "type":  "string"
+                                                                                                   },
+                                                                                 "result":  {
+                                                                                                "type":  "object"
+                                                                                            },
+                                                                                 "pricing":  {
+                                                                                                 "type":  "object"
+                                                                                             },
+                                                                                 "authority":  {
+                                                                                                   "type":  "object"
+                                                                                               },
+                                                                                 "agentproof":  {
+                                                                                                    "type":  "object"
+                                                                                                },
+                                                                                 "rate_limit":  {
+                                                                                                    "type":  "object"
+                                                                                                },
+                                                                                 "receipt":  {
+                                                                                                 "type":  "object"
+                                                                                             },
+                                                                                 "error":  {
+                                                                                               "type":  [
+                                                                                                            "object",
+                                                                                                            "null"
+                                                                                                        ]
+                                                                                           }
+                                                                             }
+                                                          }
+                                   }
+                   },
+    "x-tarzan-identity":  "urn:air:constantiniulian664-ui.github.io:api:workflow-reliability",
+    "x-tarzan-public-sandbox":  true,
+    "x-tarzan-live-payment":  false,
+    "x-tarzan-reference-price":  {
+                                     "amount":  299.0,
+                                     "currency":  "CHF",
+                                     "state":  "HYPOTHESIS",
+                                     "chargedInPhase5":  false
+                                 },
+    "x-tarzan-verification":  {
+                                  "system":  "AgentProof",
+                                  "phase3Verified":  true
+                              },
+    "x-tarzan-authority":  {
+                               "system":  "AURA",
+                               "automaticExternalSpendCHF":  0.0
+                           },
+    "x-tarzan-auth-truth":  "LOCAL_ASSERTION is not cryptographic authentication.",
+    "x-tarzan-availability":  {
+                                  "health":  "/health",
+                                  "catalog":  "/capabilities"
+                              },
+    "x-tarzan-protocol-adapters":  {
+                                       "mcp":  "https://communications-outstanding-digest-before.trycloudflare.com/mcp",
+                                       "a2a":  "https://communications-outstanding-digest-before.trycloudflare.com/a2a"
+                                   }
 }
