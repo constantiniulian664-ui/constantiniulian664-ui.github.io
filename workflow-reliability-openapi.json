@@ -31,12 +31,13 @@
         }
       }
     },
-
     "/commerce/payment-methods": {
       "get": {
         "operationId": "listPaymentMethods",
         "responses": {
-          "200": {"description": "Available sandbox methods"}
+          "200": {
+            "description": "Available sandbox methods"
+          }
         }
       }
     },
@@ -47,12 +48,16 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/OfferRequest"}
+              "schema": {
+                "$ref": "#/components/schemas/OfferRequest"
+              }
             }
           }
         },
         "responses": {
-          "200": {"description": "Machine-readable CHF offer"}
+          "200": {
+            "description": "Machine-readable CHF offer"
+          }
         }
       }
     },
@@ -63,12 +68,16 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/ChallengeRequest"}
+              "schema": {
+                "$ref": "#/components/schemas/ChallengeRequest"
+              }
             }
           }
         },
         "responses": {
-          "200": {"description": "Authorized MPP/x402 sandbox challenge"}
+          "200": {
+            "description": "Authorized MPP/x402 sandbox challenge"
+          }
         }
       }
     },
@@ -79,12 +88,16 @@
           "required": true,
           "content": {
             "application/json": {
-              "schema": {"$ref": "#/components/schemas/CompleteRequest"}
+              "schema": {
+                "$ref": "#/components/schemas/CompleteRequest"
+              }
             }
           }
         },
         "responses": {
-          "200": {"description": "Settlement, verified result and reconciliation"}
+          "200": {
+            "description": "Settlement, verified result and reconciliation"
+          }
         }
       }
     }
@@ -93,9 +106,14 @@
     "schemas": {
       "OfferRequest": {
         "type": "object",
-        "required": ["buyer_id", "capability_id"],
+        "required": [
+          "buyer_id",
+          "capability_id"
+        ],
         "properties": {
-          "buyer_id": {"type": "string"},
+          "buyer_id": {
+            "type": "string"
+          },
           "capability_id": {
             "type": "string",
             "const": "WORKFLOW_RELIABILITY"
@@ -115,16 +133,32 @@
           "allowed_rails"
         ],
         "properties": {
-          "mandate_id": {"type": "string"},
-          "buyer_id": {"type": "string"},
-          "seller_id": {"type": "string", "const": "TARZAN_FORGE"},
+          "mandate_id": {
+            "type": "string"
+          },
+          "buyer_id": {
+            "type": "string"
+          },
+          "seller_id": {
+            "type": "string",
+            "const": "TARZAN_FORGE"
+          },
           "capability_id": {
             "type": "string",
             "const": "WORKFLOW_RELIABILITY"
           },
-          "currency": {"type": "string", "const": "CHF"},
-          "max_amount_chf": {"type": "number", "minimum": 299.0},
-          "expires_at": {"type": "string", "format": "date-time"},
+          "currency": {
+            "type": "string",
+            "const": "CHF"
+          },
+          "max_amount_chf": {
+            "type": "number",
+            "minimum": 299.0
+          },
+          "expires_at": {
+            "type": "string",
+            "format": "date-time"
+          },
           "allowed_rails": {
             "type": "array",
             "minItems": 1,
@@ -140,10 +174,18 @@
       },
       "ChallengeRequest": {
         "type": "object",
-        "required": ["offer_id", "mandate", "rail_id"],
+        "required": [
+          "offer_id",
+          "mandate",
+          "rail_id"
+        ],
         "properties": {
-          "offer_id": {"type": "string"},
-          "mandate": {"$ref": "#/components/schemas/BuyerMandate"},
+          "offer_id": {
+            "type": "string"
+          },
+          "mandate": {
+            "$ref": "#/components/schemas/BuyerMandate"
+          },
           "rail_id": {
             "type": "string",
             "enum": [
@@ -165,12 +207,25 @@
           "proof"
         ],
         "properties": {
-          "challenge_id": {"type": "string"},
-          "mandate_id": {"type": "string"},
-          "buyer_id": {"type": "string"},
-          "nonce": {"type": "string"},
-          "amount_chf": {"type": "number"},
-          "currency": {"type": "string", "const": "CHF"},
+          "challenge_id": {
+            "type": "string"
+          },
+          "mandate_id": {
+            "type": "string"
+          },
+          "buyer_id": {
+            "type": "string"
+          },
+          "nonce": {
+            "type": "string"
+          },
+          "amount_chf": {
+            "type": "number"
+          },
+          "currency": {
+            "type": "string",
+            "const": "CHF"
+          },
           "proof": {
             "type": "string",
             "description": "Lowercase SHA-256 hex of the canonical proof material."
@@ -180,7 +235,10 @@
             "default": false,
             "description": "Sandbox test control only."
           },
-          "sandbox_only": {"type": "boolean", "const": true}
+          "sandbox_only": {
+            "type": "boolean",
+            "const": true
+          }
         }
       },
       "CompleteRequest": {
@@ -192,25 +250,40 @@
           "input"
         ],
         "properties": {
-          "challenge_id": {"type": "string"},
+          "challenge_id": {
+            "type": "string"
+          },
           "credential": {
             "$ref": "#/components/schemas/SandboxCredential"
           },
-          "idempotency_key": {"type": "string"},
+          "idempotency_key": {
+            "type": "string"
+          },
           "input": {
             "type": "object",
-            "required": ["workflow"],
+            "required": [
+              "workflow"
+            ],
             "properties": {
               "workflow": {
                 "type": "object",
-                "required": ["nodes", "connections"],
+                "required": [
+                  "nodes",
+                  "connections"
+                ],
                 "properties": {
                   "nodes": {
                     "type": "array",
-                    "items": {"type": "object"}
+                    "items": {
+                      "type": "object"
+                    }
                   },
-                  "connections": {"type": "object"},
-                  "settings": {"type": "object"}
+                  "connections": {
+                    "type": "object"
+                  },
+                  "settings": {
+                    "type": "object"
+                  }
                 },
                 "additionalProperties": true
               }
@@ -278,5 +351,76 @@
     "real_settlement": false,
     "real_revenue": false,
     "sandbox_revenue_excluded_from_profit": true
+  },
+  "x-tarzan-commerce-recipe": {
+    "version": "0.1",
+    "payment_methods_path": "/commerce/payment-methods",
+    "steps": [
+      {
+        "id": "offer",
+        "method": "POST",
+        "path": "/commerce/offer",
+        "body": {
+          "buyer_id": "$buyer_id",
+          "capability_id": "WORKFLOW_RELIABILITY"
+        }
+      },
+      {
+        "id": "mandate",
+        "local_transform": {
+          "mandate_id": "MANDATE-$offer.offer_id-$buyer_id",
+          "buyer_id": "$buyer_id",
+          "seller_id": "$offer.seller_id",
+          "capability_id": "$offer.capability_id",
+          "currency": "$offer.currency",
+          "max_amount_chf": "$offer.amount_chf",
+          "expires_at": "$now_plus_10_minutes",
+          "allowed_rails": [
+            "$rail_id"
+          ],
+          "sandbox_only": true
+        }
+      },
+      {
+        "id": "challenge",
+        "method": "POST",
+        "path": "/commerce/challenge",
+        "body": {
+          "offer_id": "$offer.offer_id",
+          "mandate": "$mandate",
+          "rail_id": "$rail_id"
+        }
+      },
+      {
+        "id": "credential",
+        "local_transform": {
+          "challenge_id": "$challenge.challenge.challenge_id",
+          "mandate_id": "$mandate.mandate_id",
+          "buyer_id": "$buyer_id",
+          "nonce": "$challenge.challenge.nonce",
+          "amount_chf": "$challenge.challenge.amount_chf",
+          "currency": "$challenge.challenge.currency",
+          "proof": "$sha256_canonical_proof_material",
+          "simulate_failure": false,
+          "sandbox_only": true
+        }
+      },
+      {
+        "id": "complete",
+        "method": "POST",
+        "path": "/commerce/complete",
+        "body": {
+          "challenge_id": "$challenge.challenge.challenge_id",
+          "credential": "$credential",
+          "idempotency_key": "$buyer_generated_unique_key",
+          "input": "$capability_input"
+        }
+      }
+    ],
+    "truth": {
+      "seller_builds_buyer_credential": false,
+      "live_payment": false,
+      "real_funds_moved": false
+    }
   }
 }
