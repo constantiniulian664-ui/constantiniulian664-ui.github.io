@@ -1,30 +1,52 @@
-﻿{
+{
   "entries": [
     {
       "identifier": "urn:air:constantiniulian664-ui.github.io:api:workflow-reliability",
       "displayName": "TARZAN Workflow Reliability",
       "type": "application/vnd.oai.openapi+json",
       "url": "https://constantiniulian664-ui.github.io/workflow-reliability-openapi.json",
-      "description": "AgentProof-verified TARZAN sandbox capability for diagnosing and applying bounded deterministic reliability repairs to sanitized n8n workflow JSON.",
+      "description": "AgentProof-verified TARZAN sandbox capability for discovering, pricing, machine-authorizing, sandbox-paying and executing bounded deterministic reliability repairs on sanitized n8n workflow JSON.",
       "representativeQueries": [
-        "find a service that can repair retry handling in an n8n workflow",
-        "diagnose reliability problems in a sanitized n8n automation workflow",
-        "repair deterministic n8n workflow reliability issues and return verification evidence",
-        "find an API for bounded n8n workflow repair with machine-readable verification"
+        "buy a verified service that repairs retry handling in an n8n workflow",
+        "find an agent service that can price and repair a sanitized n8n workflow",
+        "pay an API to diagnose n8n workflow reliability and return verification evidence",
+        "find a machine-commerce API for bounded n8n workflow repair"
       ],
-      "capabilities": ["WorkflowReliability","N8nWorkflowRepair","WorkflowDiagnostics","AgentProofEvidence"],
-      "tags": ["n8n","workflow","automation","reliability","agentproof"],
-      "version": "0.1",
-      "updatedAt": "2026-09-29T15:36:28Z",
+      "capabilities": [
+        "WorkflowReliability",
+        "N8nWorkflowRepair",
+        "AgentProofEvidence",
+        "MachineCommerce",
+        "MPPSemanticSandbox",
+        "X402V2SemanticSandbox"
+      ],
+      "tags": [
+        "n8n",
+        "workflow",
+        "automation",
+        "reliability",
+        "agentproof",
+        "machine-commerce"
+      ],
+      "version": "0.2",
+      "updatedAt": "2026-09-29T16:05:00Z",
       "metadata": {
         "tarzan": {
-          "phase": 5,
+          "phase": 6,
           "mode": "PUBLIC_SANDBOX",
-          "referencePrice": {"amount": 299.0, "currency": "CHF", "state": "HYPOTHESIS"},
+          "referencePrice": {
+            "amount": 299.0,
+            "currency": "CHF",
+            "state": "HYPOTHESIS"
+          },
+          "paymentMethods": [
+            "MPP_SEMANTIC_SANDBOX",
+            "X402_V2_SEMANTIC_SANDBOX"
+          ],
           "livePayment": false,
           "artifactId": "WORKFLOW_RELIABILITY",
           "agentProof": "PHASE3_VERIFIED",
-          "auth": "non-cryptographic sandbox caller assertion",
+          "aura": "ZERO_EXTERNAL_SPEND",
           "runtime": "https://communications-outstanding-digest-before.trycloudflare.com"
         }
       }
