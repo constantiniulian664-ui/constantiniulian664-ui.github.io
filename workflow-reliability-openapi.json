@@ -368,7 +368,7 @@
       {
         "id": "mandate",
         "local_transform": {
-          "mandate_id": "MANDATE-$offer.offer_id-$buyer_id",
+          "mandate_id": "$offer.offer_id",
           "buyer_id": "$buyer_id",
           "seller_id": "$offer.seller_id",
           "capability_id": "$offer.capability_id",
