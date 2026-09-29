@@ -1,0 +1,27 @@
+﻿{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "TARZAN Workflow Reliability Sandbox",
+    "version": "0.1",
+    "description": "Public sandbox API for the Phase-3 AgentProof-verified WORKFLOW_RELIABILITY Economic Artifact. No live payment."
+  },
+  "servers": [{"url": "https://communications-outstanding-digest-before.trycloudflare.com"}],
+  "paths": {
+    "/health": {"get": {"operationId": "health", "responses": {"200": {"description": "Sandbox health"}}}},
+    "/capabilities": {"get": {"operationId": "listCapabilities", "responses": {"200": {"description": "Machine-readable TARZAN capability catalog"}}}},
+    "/invoke": {"post": {
+      "operationId": "invokeWorkflowReliability",
+      "summary": "Run bounded Workflow Reliability on sanitized n8n JSON",
+      "requestBody": {"required": true},
+      "responses": {"200": {"description": "Normalized TARZAN result, pricing, AURA decision, AgentProof evidence, rate-limit state and receipt"}}
+    }}
+  },
+  "x-tarzan-identity": "urn:air:constantiniulian664-ui.github.io:api:workflow-reliability",
+  "x-tarzan-public-sandbox": true,
+  "x-tarzan-live-payment": false,
+  "x-tarzan-auth-truth": "LOCAL_ASSERTION is not cryptographic authentication.",
+  "x-tarzan-protocol-adapters": {
+    "mcp": "https://communications-outstanding-digest-before.trycloudflare.com/mcp",
+    "a2a": "https://communications-outstanding-digest-before.trycloudflare.com/a2a"
+  }
+}

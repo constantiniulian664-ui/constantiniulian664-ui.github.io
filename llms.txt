@@ -1,0 +1,8 @@
+﻿# TARZAN Machine Discovery
+
+Stable identity: urn:air:constantiniulian664-ui.github.io:api:workflow-reliability
+ARD manifest: https://constantiniulian664-ui.github.io/.well-known/ard.json
+OpenAPI: https://constantiniulian664-ui.github.io/workflow-reliability-openapi.json
+Purpose: bounded deterministic reliability repair for sanitized n8n workflow JSON.
+Reference price: CHF 299 hypothesis. Phase-5 sandbox charges CHF 0.
+Truth boundary: public sandbox; live payment disabled; client assertion is not cryptographic authentication.

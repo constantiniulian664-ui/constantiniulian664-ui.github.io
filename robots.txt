@@ -1,0 +1,3 @@
+﻿User-agent: *
+Allow: /
+Agentmap: https://constantiniulian664-ui.github.io/.well-known/ard.json
